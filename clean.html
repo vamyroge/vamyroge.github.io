@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trần Công Triều</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8fafc; --surface: #fff; --border: #e2e8f0;
+      --text: #0f172a; --muted: #475569; --primary: #1d4ed8;
+      --accent: #f97316; --soft: #eff6ff;
+    }
+    [data-theme="dark"] {
+      --bg: #0b1120; --surface: #111827; --border: #1f2937;
+      --text: #f8fafc; --muted: #94a3b8; --primary: #3b82f6;
+      --accent: #fb923c; --soft: rgba(59, 130, 246, .14);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 20px; scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body { font-family: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+    a { color: inherit; }
+
+    .header { position: sticky; top: 0; z-index: 50; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .header-inner, .container { max-width: 1380px; margin: 0 auto; padding: 0 24px; }
+    .header-inner { padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .logo { font-weight: 800; font-size: 1.05rem; text-decoration: none; letter-spacing: -.02em; }
+    .logo span { color: var(--accent); }
+    .nav { display: flex; gap: 20px; list-style: none; }
+    .nav a { text-decoration: none; font-size: .9rem; font-weight: 600; color: var(--muted); }
+    .nav a:hover { color: var(--primary); }
+    .theme-btn { padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: 600 .82rem inherit; cursor: pointer; }
+
+    section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    .sec-title { font-size: clamp(1.4rem, 2.6vw, 1.85rem); font-weight: 800; letter-spacing: -.025em; margin-bottom: 18px; }
+
+    /* Giới thiệu */
+    .hero { display: grid; grid-template-columns: 1fr 1.05fr; gap: 28px; align-items: center; }
+    .hero h1 { font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 800; line-height: 1.12; letter-spacing: -.03em; margin-bottom: 10px; }
+    .hero-bio { color: var(--muted); font-size: .96rem; margin-bottom: 20px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 14px; }
+    .stat strong { display: block; font-size: 1.45rem; font-weight: 800; color: var(--primary); line-height: 1.15; }
+    .stat:nth-child(3) strong { color: var(--accent); }
+    .stat span { font-size: .8rem; color: var(--muted); font-weight: 600; }
+
+    .btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 10px; font-size: .9rem; font-weight: 700; text-decoration: none; color: #fff; transition: transform .18s, opacity .18s; }
+    .btn:hover { transform: translateY(-1px); opacity: .92; }
+    .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .btn-tiktok { background: #111827; border: 1px solid rgba(255, 255, 255, .14); }
+    .btn-fb { background: #1877f2; }
+
+    .hero-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+    .hero-photos img, .gallery-col img, .donate-qr { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--border); cursor: zoom-in; }
+
+    /* Sở thích */
+    .hobby-grid { display: flex; flex-direction: column; gap: 20px; }
+    .hobby-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+    .hobby-wide { display: grid; grid-template-columns: .9fr 1.1fr; }
+    .hobby-wide > img { width: 100%; height: 100%; min-height: 290px; object-fit: cover; display: block; }
+    .hobby-body { padding: 24px 26px; display: flex; flex-direction: column; justify-content: center; }
+    .hobby-body h3 { font-size: 1.32rem; font-weight: 800; margin-bottom: 8px; }
+    .hobby-body p { color: var(--muted); font-size: .96rem; }
+
+    .sport-gallery { margin-top: 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .sport-item { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .sport-item img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 15%; display: block; cursor: zoom-in; transition: transform .22s; }
+    .sport-item:hover img { transform: scale(1.03); }
+    .sport-item span { display: block; padding: 9px 10px; text-align: center; font-size: .88rem; font-weight: 700; color: var(--primary); }
+    .project-list { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+    .project-link { display: block; padding: 11px 14px; border-radius: 11px; background: var(--bg); border: 1px solid var(--border); text-decoration: none; transition: border-color .18s, transform .18s; }
+    .project-link:hover { border-color: var(--primary); transform: translateY(-1px); }
+    .project-link strong { display: block; font-size: .92rem; color: var(--primary); }
+    .project-link span { display: block; font-size: .85rem; color: var(--muted); }
+
+    /* Lịch trình */
+    .schedule-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .schedule-row { display: flex; align-items: center; gap: 14px; padding: 13px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+    .schedule-row.now { background: var(--soft); border-color: var(--primary); }
+    .schedule-time { min-width: 140px; font-weight: 800; font-size: .88rem; color: var(--primary); flex-shrink: 0; }
+    .schedule-row.now .schedule-time { color: var(--accent); }
+    .schedule-task { font-size: .92rem; font-weight: 500; }
+    .now-tag { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 6px; background: var(--accent); color: #fff; font-size: .7rem; font-weight: 700; vertical-align: middle; }
+
+    /* Cuộc sống xung quanh (2 cột cân bằng đúng tỉ lệ gốc từng ảnh) */
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; align-items: start; }
+    .gallery-col { display: flex; flex-direction: column; gap: 16px; }
+    .gallery-col img { background: var(--surface); transition: transform .22s; }
+    .gallery-col img:hover { transform: scale(1.015); }
+
+    /* Donate */
+    .donate-box { display: grid; grid-template-columns: 290px 1fr; gap: 32px; align-items: center; padding: 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; }
+    .donate-qr { background: #fff; }
+    .donate-info h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+    .donate-info p { color: var(--muted); font-size: .94rem; margin-bottom: 16px; }
+    .bank-meta { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; font-size: .94rem; }
+    .bank-meta span { color: var(--muted); margin-right: 6px; }
+    .copy-btn { padding: 9px 16px; border-radius: 10px; border: none; background: var(--primary); color: #fff; font: 700 .86rem inherit; cursor: pointer; }
+    .copy-btn:hover { opacity: .92; }
+
+    footer { text-align: center; padding: 20px; font-size: .84rem; color: var(--muted); border-top: 1px solid var(--border); }
+
+    .lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(0, 0, 0, .88); display: none; align-items: center; justify-content: center; padding: 20px; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 94vw; max-height: 90vh; width: auto; height: auto; border-radius: 10px; }
+
+    @media (max-width: 860px) {
+      .hero, .hobby-wide, .schedule-grid { grid-template-columns: 1fr; }
+      .hobby-wide > img { height: 220px; min-height: 0; }
+      .sport-gallery { grid-template-columns: repeat(2, 1fr); }
+      .nav { display: none; }
+    }
+    @media (max-width: 600px) {
+      html { font-size: 16px; }
+      section { padding: 26px 0; }
+      .stats { gap: 8px; }
+      .stat { padding: 10px; }
+      .stat strong { font-size: 1.2rem; }
+      .gallery, .donate-box { grid-template-columns: 1fr; }
+      .donate-qr { max-width: 240px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="#gioi-thieu" class="logo">Trần Công Triều<span>.</span></a>
+      <ul class="nav">
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#so-thich">Sở thích</a></li>
+        <li><a href="#lich-trinh">Lịch trình</a></li>
+        <li><a href="#cuoc-song">Cuộc sống</a></li>
+      </ul>
+      <button type="button" class="theme-btn" id="themeBtn">Chế độ tối</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="gioi-thieu">
+      <div class="hero">
+        <div>
+          <h1>Trần Công Triều</h1>
+          <p class="hero-bio">Chào mọi người, mình là Triều. Trang này tổng hợp nhanh thông tin về mình, sở thích quen thuộc, lịch sinh hoạt hàng ngày và mấy tấm ảnh đời thường cùng bạn bè.</p>
+          <div class="stats">
+            <div class="stat"><strong>99+</strong><span>Người yêu</span></div>
+            <div class="stat"><strong>0</strong><span>Điểm 10</span></div>
+            <div class="stat"><strong>100%</strong><span>LGBT</span></div>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn-tiktok" href="https://www.tiktok.com/@congtrieu0711" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.71a8.21 8.21 0 0 0 4.76 1.52V6.78a4.85 4.85 0 0 1-1-.09z"/></svg>
+              <span>TikTok</span>
+            </a>
+            <a class="btn btn-fb" href="https://www.facebook.com/share/1MGQf9BVoY/" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.13 8.44 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.24.19 2.24.19v2.46H15.2c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99C18.34 21.13 22 16.99 22 12z"/></svg>
+              <span>Facebook</span>
+            </a>
+          </div>
+        </div>
+        <div class="hero-photos">
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/2.jpg" alt="Trần Công Triều" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/1.jpg" alt="Trần Công Triều" data-zoom />
+        </div>
+      </div>
+    </section>
+
+    <section id="so-thich">
+      <h2 class="sec-title">Sở thích</h2>
+      <div class="hobby-grid">
+        <article class="hobby-card hobby-wide">
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/tech.jpg" alt="Công nghệ" loading="lazy" />
+          <div class="hobby-body">
+            <h3>Công nghệ</h3>
+            <p>Thích tìm hiểu máy tính, lập trình và tự làm vài trang web nhỏ:</p>
+            <div class="project-list">
+              <a class="project-link" href="https://dgnl2027.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <strong>dgnl2027.vercel.app ↗</strong>
+                <span>Hỗ trợ ôn thi Đánh giá năng lực</span>
+              </a>
+              <a class="project-link" href="https://12a03game.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <strong>12a03game.vercel.app ↗</strong>
+                <span>Làm game cho mọi người chơi vui</span>
+              </a>
+              <a class="project-link" href="https://tryeustudyhub.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <strong>tryeustudyhub.vercel.app ↗</strong>
+                <span>Web nghiên cứu hành vi học tập</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="hobby-card">
+          <div class="hobby-body">
+            <h3>Thể thao</h3>
+            <p>Vận động đều đặn cho khỏe người và xả stress với 4 bộ môn yêu thích:</p>
+            <div class="sport-gallery">
+              <div class="sport-item"><img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/sport-bongda.jpg" alt="Bóng đá" loading="lazy" data-zoom /><span>Bóng đá</span></div>
+              <div class="sport-item"><img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/sport-caulong.jpg" alt="Cầu lông" loading="lazy" data-zoom /><span>Cầu lông</span></div>
+              <div class="sport-item"><img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/sport-chaybo.jpg" alt="Chạy bộ" loading="lazy" data-zoom /><span>Chạy bộ</span></div>
+              <div class="sport-item"><img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/sport-boxing.jpg" alt="Boxing" loading="lazy" data-zoom /><span>Boxing</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hobby-card hobby-wide">
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/game.jpg" alt="Game" loading="lazy" />
+          <div class="hobby-body">
+            <h3>Game</h3>
+            <p>Rảnh là rủ anh em vào trận giải trí, leo rank và tám chuyện cho vui sau giờ học.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="lich-trinh">
+      <h2 class="sec-title">Lịch trình hàng ngày</h2>
+      <div class="schedule-grid">
+        <div class="schedule-row" data-s="6" data-e="7"><div class="schedule-time">06:30 – 07:00</div><div class="schedule-task">Ngủ dậy, ăn sáng, chuẩn bị đi học</div></div>
+        <div class="schedule-row" data-s="7" data-e="12"><div class="schedule-time">07:00 – 11:30</div><div class="schedule-task">Đi học buổi sáng trên lớp</div></div>
+        <div class="schedule-row" data-s="12" data-e="14"><div class="schedule-time">11:30 – 13:30</div><div class="schedule-task">Ăn trưa, nghỉ trưa</div></div>
+        <div class="schedule-row" data-s="14" data-e="17"><div class="schedule-time">14:00 – 17:00</div><div class="schedule-task">Học buổi chiều hoặc tự học ở nhà</div></div>
+        <div class="schedule-row" data-s="17" data-e="19"><div class="schedule-time">17:00 – 18:30</div><div class="schedule-task">Chơi thể thao, đi dạo với bạn bè</div></div>
+        <div class="schedule-row" data-s="19" data-e="20"><div class="schedule-time">19:00 – 20:00</div><div class="schedule-task">Tắm rửa, ăn tối cùng gia đình</div></div>
+        <div class="schedule-row" data-s="20" data-e="22"><div class="schedule-time">20:00 – 22:00</div><div class="schedule-task">Làm bài tập, vọc máy tính hoặc chơi game</div></div>
+        <div class="schedule-row" data-s="22" data-e="24"><div class="schedule-time">22:30</div><div class="schedule-task">Lướt TikTok, nghe nhạc rồi đi ngủ</div></div>
+      </div>
+    </section>
+
+    <section id="cuoc-song">
+      <h2 class="sec-title">Cuộc sống xung quanh</h2>
+      <div class="gallery">
+        <div class="gallery-col">
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/4.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/5.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/8.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/9.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/15.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/12.jpg" alt="" loading="lazy" data-zoom />
+        </div>
+        <div class="gallery-col">
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/6.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/3.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/7.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/10.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/11.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/13.jpg" alt="" loading="lazy" data-zoom />
+          <img src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/14.jpg" alt="" loading="lazy" data-zoom />
+        </div>
+      </div>
+    </section>
+
+    <section id="donate">
+      <h2 class="sec-title">Donate</h2>
+      <div class="donate-box">
+        <img class="donate-qr" src="https://cdn.jsdelivr.net/gh/vamyroge/vamyroge.github.io@main/images/donate-qr.jpg" alt="Mã QR Techcombank Trần Công Triều" data-zoom />
+        <div class="donate-info">
+          <h3>Ủng hộ / Mời mình ly cà phê</h3>
+          <p>Quét mã VietQR bên cạnh hoặc sao chép số tài khoản bên dưới. Cảm ơn bạn nhiều!</p>
+          <div class="bank-meta">
+            <div><span>Ngân hàng:</span><strong>Techcombank</strong></div>
+            <div><span>Chủ tài khoản:</span><strong>TRAN CONG TRIEU</strong></div>
+            <div><span>Số tài khoản:</span><strong>7680 0913 24</strong></div>
+          </div>
+          <button type="button" class="copy-btn" id="copyStkBtn">Sao chép số tài khoản</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Trần Công Triều</footer>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true"><img id="lightboxImg" alt="" /></div>
+
+  <script>
+    (() => {
+      const root = document.documentElement, themeBtn = document.getElementById("themeBtn");
+      const setTheme = (t) => {
+        const mode = t === "dark" ? "dark" : "light";
+        root.setAttribute("data-theme", mode);
+        themeBtn.textContent = mode === "dark" ? "Chế độ sáng" : "Chế độ tối";
+      };
+      try { setTheme(localStorage.getItem("theme") || "light"); } catch (_) {}
+      themeBtn.onclick = () => {
+        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        setTheme(next);
+        try { localStorage.setItem("theme", next); } catch (_) {}
+      };
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const h = new Date().getHours();
+      document.querySelectorAll(".schedule-row").forEach((r) => {
+        if (h >= +r.dataset.s && h < +r.dataset.e) {
+          r.classList.add("now");
+          r.querySelector(".schedule-task").insertAdjacentHTML("beforeend", '<span class="now-tag">Hiện tại</span>');
+        }
+      });
+
+      const lb = document.getElementById("lightbox"), lbImg = document.getElementById("lightboxImg");
+      document.querySelectorAll("[data-zoom]").forEach((img) => {
+        img.onclick = () => { lbImg.src = img.src; lb.classList.add("open"); };
+      });
+      lb.onclick = () => lb.classList.remove("open");
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") lb.classList.remove("open"); });
+
+      const copyBtn = document.getElementById("copyStkBtn");
+      copyBtn.onclick = () => {
+        const stk = "7680091324";
+        const ok = () => {
+          copyBtn.textContent = "Đã sao chép: 7680 0913 24";
+          setTimeout(() => { copyBtn.textContent = "Sao chép số tài khoản"; }, 1800);
+        };
+        const fallback = () => {
+          const t = Object.assign(document.createElement("textarea"), { value: stk });
+          t.style.cssText = "position:fixed;opacity:0";
+          document.body.append(t); t.select();
+          try { if (document.execCommand("copy")) ok(); } catch (_) {}
+          t.remove();
+        };
+        navigator.clipboard?.writeText ? navigator.clipboard.writeText(stk).then(ok).catch(fallback) : fallback();
+      };
+    })();
+  </script>
+</body>
+</html>
